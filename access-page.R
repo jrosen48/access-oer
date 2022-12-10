@@ -67,7 +67,7 @@ access_other_main_stuff <- function(h) {
     html_text()
   
   grades <- my_html %>% 
-    html_nodes("dd:nth-child(6)") %>% 
+    html_nodes(".materials-details-first-part dd:nth-child(6)") %>% 
     html_text()
   
   material_type <- my_html %>% 
