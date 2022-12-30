@@ -11,6 +11,22 @@ access_title <- function(h) {
   title
 }
 
+access_unique_id <- function(h) {
+
+  print(str_c("Accessing: ", h))
+  
+  my_html <- h %>% 
+    read_html()
+  
+  goto <- my_html %>% 
+    html_nodes("#goto") %>% 
+    html_attr("href")
+  
+}
+
+unique_links <- l %>% 
+  map(access_unique_id)
+
 access_stats <- function(h) {
   
   print(str_c("Accessing: ", h))
