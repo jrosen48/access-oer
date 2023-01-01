@@ -45,8 +45,10 @@ nrow(t) # 48496
 
 ```{r}
 t %>% 
+  mutate(unique_id = n()) %>% 
   unnest(subject) %>% 
   filter(subject %in% c("Applied Science", "Life Science", "Physical Science")) %>% 
+  nest(unique_id) %>% 
   distinct(unique_links) # 8937
 
 8937/48496 # .184
@@ -64,7 +66,8 @@ t %>%
   summarize(n = n(),
             mean_views = mean(views)) %>% 
   mutate(prop = n / 8937) %>% 
-  arrange(desc(prop))
+  arrange(desc(prop)) %>% 
+  knitr::kable()
 ### lots of life science
 ```
 
@@ -91,7 +94,9 @@ t %>%
                       "Graduate / Professional",
                       "Career / Technical", 
                       "Adult Education")) %>% 
-  mutate(prop = n / 8937)
+  mutate(prop = n / 8937) %>% 
+  arrange(desc(n)) %>% 
+  knitr::kable()
 
 ### different from TPT - more upper-level
 ```
@@ -146,7 +151,10 @@ t %>%
   summarize(n = n(),
             mean_views = mean(views)) %>% 
   mutate(prop = n / 8937) %>% 
-  arrange(desc(n))
+  arrange(desc(n)) %>% 
+  mutate(prop = prop * 100,
+         prop = round(prop, 1)) %>% 
+  knitr::kable()
 
 ```
 
@@ -163,7 +171,8 @@ t %>%
   summarize(n = n(),
             mean_views = mean(views)) %>%  
   mutate(prop = n / 8937) %>% 
-  arrange(desc(n))
+  arrange(desc(year)) %>% 
+  knitr::kable()
 ```
 ## license
 
@@ -177,11 +186,16 @@ t %>%
   summarize(n = n(),
             mean_views = mean(views)) %>% 
   arrange(desc(n)) %>% 
-  mutate(prop = n / 8937)
+  mutate(prop = n / 8937) %>% 
+  filter(n >= 10) %>% 
+  mutate(prop = prop * 100,
+         prop = round(prop, 1)) %>% 
+  knitr::kable()
 ```
 
 
 ## endorsements
+
 ```{r}
 t %>% 
   unnest(subject) %>% 
@@ -194,7 +208,28 @@ t %>%
   summarize(n = n(),
             mean_views = mean(views)) %>%  
   mutate(prop = n / 8937) %>% 
-  arrange(desc(n))
+  arrange(desc(n)) %>% 
+  knitr::kable()
+
+length_zero <- function(x) {
+  length(x) == 0
+}
+
+t$any_endorsements <- t$endorsements %>% 
+  map_int(length)
+
+t %>% 
+  mutate(unique_id = n()) %>% 
+  unnest(subject) %>% 
+  filter(subject %in% c("Applied Science", "Life Science", "Physical Science")) %>% 
+  distinct(unique_links, .keep_all = TRUE) %>% 
+  group_by(any_endorsements) %>% 
+  summarize(n = n(),
+            mean_views = mean(views)) %>% 
+    mutate(prop = n / 8937) %>% 
+    mutate(prop = prop * 100,
+         prop = round(prop, 1)) %>% 
+  knitr::kable()
 ```
 
 
@@ -216,5 +251,44 @@ t %>%
             mean_views = mean(views)) %>%  
   left_join(standards) %>% 
   mutate(prop = n / 8937) %>% 
-  arrange(desc(n))
+  arrange(desc(n)) %>% 
+  knitr::kable()
+
+t %>% 
+  unnest(subject) %>% 
+  filter(subject %in% c("Applied Science", "Life Science", "Physical Science")) %>% 
+  unnest(standards) %>% 
+  unnest(standards) %>%
+  mutate(standards = tolower(standards)) %>% 
+  filter(str_detect(standards, "ngss")) %>% 
+  nrow()
+
+tt <- t %>% 
+  unnest(subject) %>% 
+  filter(subject %in% c("Applied Science", "Life Science", "Physical Science")) %>% 
+  distinct(unique_links, .keep_all = TRUE)
+
+tt$standards %>% 
+  map_int(length)
+
+t %>% 
+  unnest(subject) %>% 
+  filter(subject %in% c("Applied Science", "Life Science", "Physical Science")) %>% 
+  distinct(unique_links, .keep_all = TRUE) %>% 
+  mutate(standards = tolower(standards)) %>% 
+  mutate(any_ngss = str_count(standards, "ngss")) %>% View()
+  mutate(any_ngss = ifelse(any_ngss > 1, 2, any_ngss)) %>% 
+  group_by(any_ngss) %>% 
+  summarize(n = n(),
+            mean_views = mean(views)) %>% 
+    mutate(prop = n / 8937) %>% 
+    mutate(prop = prop * 100,
+         prop = round(prop, 1)) %>% 
+  mutate(mean_views = round(mean_views, 1)) %>% 
+  select(any_ngss, n, prop, mean_views) %>% 
+  knitr::kable()
+```
+
+```{r}
+2
 ```

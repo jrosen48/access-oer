@@ -426,13 +426,38 @@ nrow(t) # 48496</code></pre>
   summarize(n = n(),
             mean_views = mean(views)) %&gt;% 
   mutate(prop = n / 8937) %&gt;% 
-  arrange(desc(prop))</code></pre>
-<pre><code>## # A tibble: 3 × 4
-##   subject              n mean_views  prop
-##   &lt;chr&gt;            &lt;int&gt;      &lt;dbl&gt; &lt;dbl&gt;
-## 1 Life Science      6208       37.1 0.695
-## 2 Applied Science   1950       86.6 0.218
-## 3 Physical Science  1940       65.2 0.217</code></pre>
+  arrange(desc(prop)) %&gt;% 
+  knitr::kable()</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">subject</th>
+<th align="right">n</th>
+<th align="right">mean_views</th>
+<th align="right">prop</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Life Science</td>
+<td align="right">6208</td>
+<td align="right">37.05928</td>
+<td align="right">0.6946403</td>
+</tr>
+<tr class="even">
+<td align="left">Applied Science</td>
+<td align="right">1950</td>
+<td align="right">86.62256</td>
+<td align="right">0.2181940</td>
+</tr>
+<tr class="odd">
+<td align="left">Physical Science</td>
+<td align="right">1940</td>
+<td align="right">65.21392</td>
+<td align="right">0.2170751</td>
+</tr>
+</tbody>
+</table>
 <pre class="r"><code>### lots of life science</code></pre>
 </div>
 <div id="prop-level" class="section level2">
@@ -455,20 +480,81 @@ nrow(t) # 48496</code></pre>
                       &quot;Graduate / Professional&quot;,
                       &quot;Career / Technical&quot;, 
                       &quot;Adult Education&quot;)) %&gt;% 
-  mutate(prop = n / 8937)</code></pre>
-<pre><code>## # A tibble: 10 × 4
-##    level                                  n mean_views   prop
-##    &lt;chr&gt;                              &lt;int&gt;      &lt;dbl&gt;  &lt;dbl&gt;
-##  1 Adult Education                      206      111.  0.0231
-##  2 Career / Technical                  2555       17.4 0.286 
-##  3 College / Upper Division            4893       55.4 0.547 
-##  4 Community College / Lower Division  4847       65.8 0.542 
-##  5 Graduate / Professional             1906       16.3 0.213 
-##  6 High School                         2818       41.0 0.315 
-##  7 Lower Primary                        662       58.0 0.0741
-##  8 Middle School                       1875       34.7 0.210 
-##  9 Preschool                            113       75.1 0.0126
-## 10 Upper Primary                       1130       60.9 0.126</code></pre>
+  mutate(prop = n / 8937) %&gt;% 
+  arrange(desc(n)) %&gt;% 
+  knitr::kable()</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">level</th>
+<th align="right">n</th>
+<th align="right">mean_views</th>
+<th align="right">prop</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">College / Upper Division</td>
+<td align="right">4893</td>
+<td align="right">55.41978</td>
+<td align="right">0.5474992</td>
+</tr>
+<tr class="even">
+<td align="left">Community College / Lower Division</td>
+<td align="right">4847</td>
+<td align="right">65.80276</td>
+<td align="right">0.5423520</td>
+</tr>
+<tr class="odd">
+<td align="left">High School</td>
+<td align="right">2818</td>
+<td align="right">41.03833</td>
+<td align="right">0.3153183</td>
+</tr>
+<tr class="even">
+<td align="left">Career / Technical</td>
+<td align="right">2555</td>
+<td align="right">17.37769</td>
+<td align="right">0.2858901</td>
+</tr>
+<tr class="odd">
+<td align="left">Graduate / Professional</td>
+<td align="right">1906</td>
+<td align="right">16.26443</td>
+<td align="right">0.2132707</td>
+</tr>
+<tr class="even">
+<td align="left">Middle School</td>
+<td align="right">1875</td>
+<td align="right">34.66187</td>
+<td align="right">0.2098019</td>
+</tr>
+<tr class="odd">
+<td align="left">Upper Primary</td>
+<td align="right">1130</td>
+<td align="right">60.93540</td>
+<td align="right">0.1264406</td>
+</tr>
+<tr class="even">
+<td align="left">Lower Primary</td>
+<td align="right">662</td>
+<td align="right">58.01662</td>
+<td align="right">0.0740741</td>
+</tr>
+<tr class="odd">
+<td align="left">Adult Education</td>
+<td align="right">206</td>
+<td align="right">110.87864</td>
+<td align="right">0.0230502</td>
+</tr>
+<tr class="even">
+<td align="left">Preschool</td>
+<td align="right">113</td>
+<td align="right">75.11504</td>
+<td align="right">0.0126441</td>
+</tr>
+</tbody>
+</table>
 <pre class="r"><code>### different from TPT - more upper-level</code></pre>
 </div>
 <div id="interactions" class="section level2">
@@ -638,21 +724,152 @@ nrow(t) # 48496</code></pre>
   summarize(n = n(),
             mean_views = mean(views)) %&gt;% 
   mutate(prop = n / 8937) %&gt;% 
-  arrange(desc(n))</code></pre>
-<pre><code>## # A tibble: 22 × 4
-##    material_type                  n mean_views    prop
-##    &lt;chr&gt;                      &lt;int&gt;      &lt;dbl&gt;   &lt;dbl&gt;
-##  1 Activity/Lab                 588       85.2 0.0658 
-##  2 Lesson Plan                  508      105.  0.0568 
-##  3 Assessment                   265       88.7 0.0297 
-##  4 Lesson                       159       70.1 0.0178 
-##  5 Diagram/Illustration         133      116.  0.0149 
-##  6 Lecture                      125       25.2 0.0140 
-##  7 Reading                      106      140.  0.0119 
-##  8 Unit of Study                100       76.4 0.0112 
-##  9 Interactive                   99      154.  0.0111 
-## 10 Teaching/Learning Strategy    80      150.  0.00895
-## # … with 12 more rows</code></pre>
+  arrange(desc(n)) %&gt;% 
+  knitr::kable()</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">material_type</th>
+<th align="right">n</th>
+<th align="right">mean_views</th>
+<th align="right">prop</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Reading</td>
+<td align="right">2840</td>
+<td align="right">4.158803</td>
+<td align="right">0.3177800</td>
+</tr>
+<tr class="even">
+<td align="left">Activity/Lab</td>
+<td align="right">1694</td>
+<td align="right">60.649351</td>
+<td align="right">0.1895491</td>
+</tr>
+<tr class="odd">
+<td align="left">Module</td>
+<td align="right">860</td>
+<td align="right">235.158140</td>
+<td align="right">0.0962292</td>
+</tr>
+<tr class="even">
+<td align="left">Lesson</td>
+<td align="right">792</td>
+<td align="right">15.228535</td>
+<td align="right">0.0886203</td>
+</tr>
+<tr class="odd">
+<td align="left">Case Study</td>
+<td align="right">788</td>
+<td align="right">1.659898</td>
+<td align="right">0.0881728</td>
+</tr>
+<tr class="even">
+<td align="left">Lesson Plan</td>
+<td align="right">549</td>
+<td align="right">59.566485</td>
+<td align="right">0.0614300</td>
+</tr>
+<tr class="odd">
+<td align="left">Lecture</td>
+<td align="right">447</td>
+<td align="right">28.572707</td>
+<td align="right">0.0500168</td>
+</tr>
+<tr class="even">
+<td align="left">Diagram/Illustration</td>
+<td align="right">436</td>
+<td align="right">44.422018</td>
+<td align="right">0.0487859</td>
+</tr>
+<tr class="odd">
+<td align="left">Full Course</td>
+<td align="right">254</td>
+<td align="right">223.826772</td>
+<td align="right">0.0284212</td>
+</tr>
+<tr class="even">
+<td align="left">Assessment</td>
+<td align="right">253</td>
+<td align="right">47.956522</td>
+<td align="right">0.0283093</td>
+</tr>
+<tr class="odd">
+<td align="left">Simulation</td>
+<td align="right">219</td>
+<td align="right">7.602740</td>
+<td align="right">0.0245049</td>
+</tr>
+<tr class="even">
+<td align="left">Interactive</td>
+<td align="right">171</td>
+<td align="right">23.017544</td>
+<td align="right">0.0191339</td>
+</tr>
+<tr class="odd">
+<td align="left">Textbook</td>
+<td align="right">94</td>
+<td align="right">148.053191</td>
+<td align="right">0.0105181</td>
+</tr>
+<tr class="even">
+<td align="left">Teaching/Learning Strategy</td>
+<td align="right">90</td>
+<td align="right">82.366667</td>
+<td align="right">0.0100705</td>
+</tr>
+<tr class="odd">
+<td align="left">Homework/Assignment</td>
+<td align="right">86</td>
+<td align="right">106.813953</td>
+<td align="right">0.0096229</td>
+</tr>
+<tr class="even">
+<td align="left">Unit of Study</td>
+<td align="right">85</td>
+<td align="right">55.435294</td>
+<td align="right">0.0095110</td>
+</tr>
+<tr class="odd">
+<td align="left">Lecture Notes</td>
+<td align="right">64</td>
+<td align="right">55.578125</td>
+<td align="right">0.0071612</td>
+</tr>
+<tr class="even">
+<td align="left">Data Set</td>
+<td align="right">48</td>
+<td align="right">32.604167</td>
+<td align="right">0.0053709</td>
+</tr>
+<tr class="odd">
+<td align="left">Syllabus</td>
+<td align="right">23</td>
+<td align="right">38.434783</td>
+<td align="right">0.0025736</td>
+</tr>
+<tr class="even">
+<td align="left">Game</td>
+<td align="right">19</td>
+<td align="right">34.263158</td>
+<td align="right">0.0021260</td>
+</tr>
+<tr class="odd">
+<td align="left">Primary Source</td>
+<td align="right">18</td>
+<td align="right">687.555556</td>
+<td align="right">0.0020141</td>
+</tr>
+<tr class="even">
+<td align="left">Student Guide</td>
+<td align="right">17</td>
+<td align="right">31.352941</td>
+<td align="right">0.0019022</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div id="date-added" class="section level2">
 <h2>date added</h2>
@@ -666,21 +883,170 @@ nrow(t) # 48496</code></pre>
   summarize(n = n(),
             mean_views = mean(views)) %&gt;%  
   mutate(prop = n / 8937) %&gt;% 
-  arrange(desc(n))</code></pre>
-<pre><code>## # A tibble: 25 × 4
-##     year     n mean_views   prop
-##    &lt;dbl&gt; &lt;int&gt;      &lt;dbl&gt;  &lt;dbl&gt;
-##  1  2021  1254    20.5    0.140 
-##  2  2017  1200   207.     0.134 
-##  3  2022  1026     8.46   0.115 
-##  4  2005   882     0.438  0.0987
-##  5  2018   784    55.7    0.0877
-##  6  2020   701    51.8    0.0784
-##  7  2019   476    66.2    0.0533
-##  8  2016   462   215.     0.0517
-##  9  2014   447    17.1    0.0500
-## 10  2000   418     0.0670 0.0468
-## # … with 15 more rows</code></pre>
+  arrange(desc(year)) %&gt;% 
+  knitr::kable()</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="right">year</th>
+<th align="right">n</th>
+<th align="right">mean_views</th>
+<th align="right">prop</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">2022</td>
+<td align="right">1026</td>
+<td align="right">8.4561404</td>
+<td align="right">0.1148036</td>
+</tr>
+<tr class="even">
+<td align="right">2021</td>
+<td align="right">1254</td>
+<td align="right">20.5007974</td>
+<td align="right">0.1403155</td>
+</tr>
+<tr class="odd">
+<td align="right">2020</td>
+<td align="right">701</td>
+<td align="right">51.8473609</td>
+<td align="right">0.0784380</td>
+</tr>
+<tr class="even">
+<td align="right">2019</td>
+<td align="right">476</td>
+<td align="right">66.1974790</td>
+<td align="right">0.0532617</td>
+</tr>
+<tr class="odd">
+<td align="right">2018</td>
+<td align="right">784</td>
+<td align="right">55.6645408</td>
+<td align="right">0.0877252</td>
+</tr>
+<tr class="even">
+<td align="right">2017</td>
+<td align="right">1200</td>
+<td align="right">206.6675000</td>
+<td align="right">0.1342732</td>
+</tr>
+<tr class="odd">
+<td align="right">2016</td>
+<td align="right">462</td>
+<td align="right">214.5865801</td>
+<td align="right">0.0516952</td>
+</tr>
+<tr class="even">
+<td align="right">2015</td>
+<td align="right">266</td>
+<td align="right">14.8759398</td>
+<td align="right">0.0297639</td>
+</tr>
+<tr class="odd">
+<td align="right">2014</td>
+<td align="right">447</td>
+<td align="right">17.0738255</td>
+<td align="right">0.0500168</td>
+</tr>
+<tr class="even">
+<td align="right">2013</td>
+<td align="right">53</td>
+<td align="right">5.2075472</td>
+<td align="right">0.0059304</td>
+</tr>
+<tr class="odd">
+<td align="right">2012</td>
+<td align="right">316</td>
+<td align="right">19.5094937</td>
+<td align="right">0.0353586</td>
+</tr>
+<tr class="even">
+<td align="right">2011</td>
+<td align="right">129</td>
+<td align="right">31.3953488</td>
+<td align="right">0.0144344</td>
+</tr>
+<tr class="odd">
+<td align="right">2010</td>
+<td align="right">136</td>
+<td align="right">21.1985294</td>
+<td align="right">0.0152176</td>
+</tr>
+<tr class="even">
+<td align="right">2009</td>
+<td align="right">39</td>
+<td align="right">16.4615385</td>
+<td align="right">0.0043639</td>
+</tr>
+<tr class="odd">
+<td align="right">2008</td>
+<td align="right">90</td>
+<td align="right">18.0333333</td>
+<td align="right">0.0100705</td>
+</tr>
+<tr class="even">
+<td align="right">2007</td>
+<td align="right">42</td>
+<td align="right">17.8809524</td>
+<td align="right">0.0046996</td>
+</tr>
+<tr class="odd">
+<td align="right">2006</td>
+<td align="right">3</td>
+<td align="right">12.3333333</td>
+<td align="right">0.0003357</td>
+</tr>
+<tr class="even">
+<td align="right">2005</td>
+<td align="right">882</td>
+<td align="right">0.4376417</td>
+<td align="right">0.0986908</td>
+</tr>
+<tr class="odd">
+<td align="right">2004</td>
+<td align="right">85</td>
+<td align="right">0.2588235</td>
+<td align="right">0.0095110</td>
+</tr>
+<tr class="even">
+<td align="right">2003</td>
+<td align="right">254</td>
+<td align="right">14.5669291</td>
+<td align="right">0.0284212</td>
+</tr>
+<tr class="odd">
+<td align="right">2002</td>
+<td align="right">353</td>
+<td align="right">0.1048159</td>
+<td align="right">0.0394987</td>
+</tr>
+<tr class="even">
+<td align="right">2001</td>
+<td align="right">328</td>
+<td align="right">0.7286585</td>
+<td align="right">0.0367014</td>
+</tr>
+<tr class="odd">
+<td align="right">2000</td>
+<td align="right">418</td>
+<td align="right">0.0669856</td>
+<td align="right">0.0467718</td>
+</tr>
+<tr class="even">
+<td align="right">1999</td>
+<td align="right">353</td>
+<td align="right">0.1189802</td>
+<td align="right">0.0394987</td>
+</tr>
+<tr class="odd">
+<td align="right">1994</td>
+<td align="right">1</td>
+<td align="right">3.0000000</td>
+<td align="right">0.0001119</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div id="license" class="section level2">
 <h2>license</h2>
@@ -693,21 +1059,119 @@ nrow(t) # 48496</code></pre>
   summarize(n = n(),
             mean_views = mean(views)) %&gt;% 
   arrange(desc(n)) %&gt;% 
-  mutate(prop = n / 8937)</code></pre>
-<pre><code>## # A tibble: 36 × 4
-##    license                                                     n mean_…¹    prop
-##    &lt;chr&gt;                                                   &lt;int&gt;   &lt;dbl&gt;   &lt;dbl&gt;
-##  1 Creative Commons Attribution Non-Commercial Share Alike  3807  17.7   0.426  
-##  2 Creative Commons Attribution Non-Commercial              1166 203.    0.130  
-##  3 Creative Commons Attribution                             1090  76.1   0.122  
-##  4 Some Rights Reserved                                      882   0.493 0.0987 
-##  5 Creative Commons Attribution Non-Commercial No Derivat…   608  69.6   0.0680 
-##  6 Educational Use Permitted                                 485 118.    0.0543 
-##  7 Creative Commons Attribution Share Alike                  293  41.7   0.0328 
-##  8 Public Domain Dedication                                   78  15.8   0.00873
-##  9 Creative Commons Attribution No Derivatives                41  33.2   0.00459
-## 10 http://www.jonathanbird.net/jbird.html                     36  22.2   0.00403
-## # … with 26 more rows, and abbreviated variable name ¹​mean_views</code></pre>
+  mutate(prop = n / 8937) %&gt;% 
+  filter(n &gt;= 10) %&gt;% 
+  knitr::kable()</code></pre>
+<table>
+<colgroup>
+<col width="68%" />
+<col width="5%" />
+<col width="13%" />
+<col width="11%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">license</th>
+<th align="right">n</th>
+<th align="right">mean_views</th>
+<th align="right">prop</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Creative Commons Attribution Non-Commercial Share
+Alike</td>
+<td align="right">3807</td>
+<td align="right">17.7344366</td>
+<td align="right">0.4259819</td>
+</tr>
+<tr class="even">
+<td align="left">Creative Commons Attribution Non-Commercial</td>
+<td align="right">1166</td>
+<td align="right">203.2735849</td>
+<td align="right">0.1304688</td>
+</tr>
+<tr class="odd">
+<td align="left">Creative Commons Attribution</td>
+<td align="right">1090</td>
+<td align="right">76.0770642</td>
+<td align="right">0.1219649</td>
+</tr>
+<tr class="even">
+<td align="left">Some Rights Reserved</td>
+<td align="right">882</td>
+<td align="right">0.4931973</td>
+<td align="right">0.0986908</td>
+</tr>
+<tr class="odd">
+<td align="left">Creative Commons Attribution Non-Commercial No
+Derivatives</td>
+<td align="right">608</td>
+<td align="right">69.6200658</td>
+<td align="right">0.0680318</td>
+</tr>
+<tr class="even">
+<td align="left">Educational Use Permitted</td>
+<td align="right">485</td>
+<td align="right">118.4865979</td>
+<td align="right">0.0542688</td>
+</tr>
+<tr class="odd">
+<td align="left">Creative Commons Attribution Share Alike</td>
+<td align="right">293</td>
+<td align="right">41.6689420</td>
+<td align="right">0.0327851</td>
+</tr>
+<tr class="even">
+<td align="left">Public Domain Dedication</td>
+<td align="right">78</td>
+<td align="right">15.7820513</td>
+<td align="right">0.0087278</td>
+</tr>
+<tr class="odd">
+<td align="left">Creative Commons Attribution No Derivatives</td>
+<td align="right">41</td>
+<td align="right">33.2439024</td>
+<td align="right">0.0045877</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="http://www.jonathanbird.net/jbird.html" class="uri">http://www.jonathanbird.net/jbird.html</a></td>
+<td align="right">36</td>
+<td align="right">22.2500000</td>
+<td align="right">0.0040282</td>
+</tr>
+<tr class="odd">
+<td align="left">Creative Commons Attribution 4.0 International</td>
+<td align="right">31</td>
+<td align="right">11.3548387</td>
+<td align="right">0.0034687</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="http://concord.org/license" class="uri">http://concord.org/license</a></td>
+<td align="right">23</td>
+<td align="right">142.8695652</td>
+<td align="right">0.0025736</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="http://www.cellsalive.com/permissn.htm" class="uri">http://www.cellsalive.com/permissn.htm</a></td>
+<td align="right">16</td>
+<td align="right">37.5000000</td>
+<td align="right">0.0017903</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="https://creativecommons.org/licenses/publicdomain/" class="uri">https://creativecommons.org/licenses/publicdomain/</a></td>
+<td align="right">15</td>
+<td align="right">5.4000000</td>
+<td align="right">0.0016784</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="https://toolkit.climate.gov/about/faq" class="uri">https://toolkit.climate.gov/about/faq</a></td>
+<td align="right">15</td>
+<td align="right">1.8666667</td>
+<td align="right">0.0016784</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div id="endorsements" class="section level2">
 <h2>endorsements</h2>
@@ -722,21 +1186,165 @@ nrow(t) # 48496</code></pre>
   summarize(n = n(),
             mean_views = mean(views)) %&gt;%  
   mutate(prop = n / 8937) %&gt;% 
-  arrange(desc(n))</code></pre>
-<pre><code>## # A tibble: 23 × 4
-##    endorsements                         n mean_views    prop
-##    &lt;chr&gt;                            &lt;int&gt;      &lt;dbl&gt;   &lt;dbl&gt;
-##  1 OERC Reviewed K-12 Collections     307      15.3  0.0344 
-##  2 OSKB                               206      17.0  0.0231 
-##  3 Out Teach                          133      22.4  0.0149 
-##  4 Open Illinois                      113     507.   0.0126 
-##  5 Nebraska Department of Education    68      59.0  0.00761
-##  6 MOREnet                             52       3.92 0.00582
-##  7 OER Colorado                        38      60.1  0.00425
-##  8 AIAA                                32      41.7  0.00358
-##  9 OERC Reviewed Textbooks             24     119.   0.00269
-## 10 Scholarly Communication Notebook    24       3.96 0.00269
-## # … with 13 more rows</code></pre>
+  arrange(desc(n)) %&gt;% 
+  knitr::kable()</code></pre>
+<table>
+<colgroup>
+<col width="69%" />
+<col width="4%" />
+<col width="14%" />
+<col width="11%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">endorsements</th>
+<th align="right">n</th>
+<th align="right">mean_views</th>
+<th align="right">prop</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">OERC Reviewed K-12 Collections</td>
+<td align="right">307</td>
+<td align="right">15.270358</td>
+<td align="right">0.0343516</td>
+</tr>
+<tr class="even">
+<td align="left">OSKB</td>
+<td align="right">206</td>
+<td align="right">16.956311</td>
+<td align="right">0.0230502</td>
+</tr>
+<tr class="odd">
+<td align="left">Out Teach</td>
+<td align="right">133</td>
+<td align="right">22.368421</td>
+<td align="right">0.0148820</td>
+</tr>
+<tr class="even">
+<td align="left">Open Illinois</td>
+<td align="right">113</td>
+<td align="right">507.185841</td>
+<td align="right">0.0126441</td>
+</tr>
+<tr class="odd">
+<td align="left">Nebraska Department of Education</td>
+<td align="right">68</td>
+<td align="right">58.970588</td>
+<td align="right">0.0076088</td>
+</tr>
+<tr class="even">
+<td align="left">MOREnet</td>
+<td align="right">52</td>
+<td align="right">3.923077</td>
+<td align="right">0.0058185</td>
+</tr>
+<tr class="odd">
+<td align="left">OER Colorado</td>
+<td align="right">38</td>
+<td align="right">60.052632</td>
+<td align="right">0.0042520</td>
+</tr>
+<tr class="even">
+<td align="left">AIAA</td>
+<td align="right">32</td>
+<td align="right">41.656250</td>
+<td align="right">0.0035806</td>
+</tr>
+<tr class="odd">
+<td align="left">OERC Reviewed Textbooks</td>
+<td align="right">24</td>
+<td align="right">119.250000</td>
+<td align="right">0.0026855</td>
+</tr>
+<tr class="even">
+<td align="left">Scholarly Communication Notebook</td>
+<td align="right">24</td>
+<td align="right">3.958333</td>
+<td align="right">0.0026855</td>
+</tr>
+<tr class="odd">
+<td align="left">POWER Library</td>
+<td align="right">22</td>
+<td align="right">222.727273</td>
+<td align="right">0.0024617</td>
+</tr>
+<tr class="even">
+<td align="left">Wyoming Department of Education</td>
+<td align="right">13</td>
+<td align="right">198.076923</td>
+<td align="right">0.0014546</td>
+</tr>
+<tr class="odd">
+<td align="left">Washington Office of Superintendent of Public
+Instruction</td>
+<td align="right">11</td>
+<td align="right">571.636364</td>
+<td align="right">0.0012308</td>
+</tr>
+<tr class="even">
+<td align="left">Open Textbook Library</td>
+<td align="right">10</td>
+<td align="right">61.400000</td>
+<td align="right">0.0011189</td>
+</tr>
+<tr class="odd">
+<td align="left">University of Hawai’i OER Project</td>
+<td align="right">9</td>
+<td align="right">5440.555556</td>
+<td align="right">0.0010070</td>
+</tr>
+<tr class="even">
+<td align="left">ESUCC</td>
+<td align="right">8</td>
+<td align="right">19.750000</td>
+<td align="right">0.0008952</td>
+</tr>
+<tr class="odd">
+<td align="left">Open Washington Project</td>
+<td align="right">6</td>
+<td align="right">150.833333</td>
+<td align="right">0.0006714</td>
+</tr>
+<tr class="even">
+<td align="left">BranchEd</td>
+<td align="right">3</td>
+<td align="right">275.000000</td>
+<td align="right">0.0003357</td>
+</tr>
+<tr class="odd">
+<td align="left">Oregon State University</td>
+<td align="right">3</td>
+<td align="right">244.000000</td>
+<td align="right">0.0003357</td>
+</tr>
+<tr class="even">
+<td align="left">Minnesota Catalog</td>
+<td align="right">2</td>
+<td align="right">151.500000</td>
+<td align="right">0.0002238</td>
+</tr>
+<tr class="odd">
+<td align="left">Primary Sources</td>
+<td align="right">2</td>
+<td align="right">265.500000</td>
+<td align="right">0.0002238</td>
+</tr>
+<tr class="even">
+<td align="left">Alabama Virtual Library</td>
+<td align="right">1</td>
+<td align="right">396.000000</td>
+<td align="right">0.0001119</td>
+</tr>
+<tr class="odd">
+<td align="left">Maryland State Department of Education</td>
+<td align="right">1</td>
+<td align="right">13.000000</td>
+<td align="right">0.0001119</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div id="standards" class="section level2">
 <h2>standards</h2>
@@ -755,21 +1363,505 @@ nrow(t) # 48496</code></pre>
             mean_views = mean(views)) %&gt;%  
   left_join(standards) %&gt;% 
   mutate(prop = n / 8937) %&gt;% 
-  arrange(desc(n))</code></pre>
-<pre><code>## # A tibble: 65 × 5
-##    standards     n mean_views name                                          prop
-##    &lt;chr&gt;     &lt;int&gt;      &lt;dbl&gt; &lt;chr&gt;                                        &lt;dbl&gt;
-##  1 ms-ets1      87       71.6 Engineering Design                         0.00973
-##  2 4-ls1        54       62.3 From Molecules to Organisms: Structures a… 0.00604
-##  3 3-5-ets1     46       52.8 Engineering Design                         0.00515
-##  4 3-5-ets1     46       52.8 Engineering Design                         0.00515
-##  5 3-5-ets1     46       52.8 Engineering Design                         0.00515
-##  6 ms-ls2       46       55.5 Ecosystems: Interactions, Energy, and Dyn… 0.00515
-##  7 ms-ls1       43      108.  From Molecules to Organisms: Structures a… 0.00481
-##  8 ms-ps1       41       66.0 Matter and its Interactions                0.00459
-##  9 3-ls4        39       79.5 Biological Evolution: Unity and Diversity  0.00436
-## 10 3-ls3        38       74.2 Heredity: Inheritance and Variation of Tr… 0.00425
-## # … with 55 more rows</code></pre>
+  arrange(desc(n)) %&gt;% 
+  knitr::kable()</code></pre>
+<table style="width:100%;">
+<colgroup>
+<col width="9%" />
+<col width="2%" />
+<col width="10%" />
+<col width="67%" />
+<col width="9%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">standards</th>
+<th align="right">n</th>
+<th align="right">mean_views</th>
+<th align="left">name</th>
+<th align="right">prop</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">ms-ets1</td>
+<td align="right">87</td>
+<td align="right">71.64368</td>
+<td align="left">Engineering Design</td>
+<td align="right">0.0097348</td>
+</tr>
+<tr class="even">
+<td align="left">4-ls1</td>
+<td align="right">54</td>
+<td align="right">62.31481</td>
+<td align="left">From Molecules to Organisms: Structures and
+Processes</td>
+<td align="right">0.0060423</td>
+</tr>
+<tr class="odd">
+<td align="left">3-5-ets1</td>
+<td align="right">46</td>
+<td align="right">52.82609</td>
+<td align="left">Engineering Design</td>
+<td align="right">0.0051471</td>
+</tr>
+<tr class="even">
+<td align="left">3-5-ets1</td>
+<td align="right">46</td>
+<td align="right">52.82609</td>
+<td align="left">Engineering Design</td>
+<td align="right">0.0051471</td>
+</tr>
+<tr class="odd">
+<td align="left">3-5-ets1</td>
+<td align="right">46</td>
+<td align="right">52.82609</td>
+<td align="left">Engineering Design</td>
+<td align="right">0.0051471</td>
+</tr>
+<tr class="even">
+<td align="left">ms-ls2</td>
+<td align="right">46</td>
+<td align="right">55.45652</td>
+<td align="left">Ecosystems: Interactions, Energy, and Dynamics</td>
+<td align="right">0.0051471</td>
+</tr>
+<tr class="odd">
+<td align="left">ms-ls1</td>
+<td align="right">43</td>
+<td align="right">107.69767</td>
+<td align="left">From Molecules to Organisms: Structures and
+Processes</td>
+<td align="right">0.0048115</td>
+</tr>
+<tr class="even">
+<td align="left">ms-ps1</td>
+<td align="right">41</td>
+<td align="right">65.95122</td>
+<td align="left">Matter and its Interactions</td>
+<td align="right">0.0045877</td>
+</tr>
+<tr class="odd">
+<td align="left">3-ls4</td>
+<td align="right">39</td>
+<td align="right">79.48718</td>
+<td align="left">Biological Evolution: Unity and Diversity</td>
+<td align="right">0.0043639</td>
+</tr>
+<tr class="even">
+<td align="left">3-ls3</td>
+<td align="right">38</td>
+<td align="right">74.21053</td>
+<td align="left">Heredity: Inheritance and Variation of Traits</td>
+<td align="right">0.0042520</td>
+</tr>
+<tr class="odd">
+<td align="left">k-2-ets1</td>
+<td align="right">35</td>
+<td align="right">49.51429</td>
+<td align="left">Engineering Design</td>
+<td align="right">0.0039163</td>
+</tr>
+<tr class="even">
+<td align="left">k-2-ets1</td>
+<td align="right">35</td>
+<td align="right">49.51429</td>
+<td align="left">Engineering Design</td>
+<td align="right">0.0039163</td>
+</tr>
+<tr class="odd">
+<td align="left">k-2-ets1</td>
+<td align="right">35</td>
+<td align="right">49.51429</td>
+<td align="left">Engineering Design</td>
+<td align="right">0.0039163</td>
+</tr>
+<tr class="even">
+<td align="left">hs-ps1</td>
+<td align="right">34</td>
+<td align="right">273.85294</td>
+<td align="left">Matter and its Interactions</td>
+<td align="right">0.0038044</td>
+</tr>
+<tr class="odd">
+<td align="left">hs-ets1</td>
+<td align="right">33</td>
+<td align="right">146.24242</td>
+<td align="left">Engineering Design</td>
+<td align="right">0.0036925</td>
+</tr>
+<tr class="even">
+<td align="left">hs-ls4</td>
+<td align="right">30</td>
+<td align="right">38.73333</td>
+<td align="left">Biological Evolution: Unity and Diversity</td>
+<td align="right">0.0033568</td>
+</tr>
+<tr class="odd">
+<td align="left">ms-ess2</td>
+<td align="right">29</td>
+<td align="right">68.37931</td>
+<td align="left">Earth’s Systems</td>
+<td align="right">0.0032449</td>
+</tr>
+<tr class="even">
+<td align="left">ms-ps3</td>
+<td align="right">29</td>
+<td align="right">78.31034</td>
+<td align="left">Energy</td>
+<td align="right">0.0032449</td>
+</tr>
+<tr class="odd">
+<td align="left">k-ess3</td>
+<td align="right">26</td>
+<td align="right">60.61538</td>
+<td align="left">Earth and Human Activity</td>
+<td align="right">0.0029093</td>
+</tr>
+<tr class="even">
+<td align="left">4-ps3</td>
+<td align="right">24</td>
+<td align="right">49.58333</td>
+<td align="left">Energy</td>
+<td align="right">0.0026855</td>
+</tr>
+<tr class="odd">
+<td align="left">hs-ls1</td>
+<td align="right">24</td>
+<td align="right">205.70833</td>
+<td align="left">From Molecules to Organisms: Structures and
+Processes</td>
+<td align="right">0.0026855</td>
+</tr>
+<tr class="even">
+<td align="left">1-ls1</td>
+<td align="right">23</td>
+<td align="right">71.34783</td>
+<td align="left">From Molecules to Organisms: Structures and
+Processes</td>
+<td align="right">0.0025736</td>
+</tr>
+<tr class="odd">
+<td align="left">5-ps1</td>
+<td align="right">23</td>
+<td align="right">77.13043</td>
+<td align="left">Matter and Its Interactions</td>
+<td align="right">0.0025736</td>
+</tr>
+<tr class="even">
+<td align="left">1-ps4</td>
+<td align="right">22</td>
+<td align="right">49.13636</td>
+<td align="left">Waves and Their Applications in Technologies for
+Information Transfer</td>
+<td align="right">0.0024617</td>
+</tr>
+<tr class="odd">
+<td align="left">5-ls2</td>
+<td align="right">22</td>
+<td align="right">43.81818</td>
+<td align="left">Ecosystems: Interactions, Energy, and Dynamics</td>
+<td align="right">0.0024617</td>
+</tr>
+<tr class="even">
+<td align="left">ms-ess3</td>
+<td align="right">22</td>
+<td align="right">50.22727</td>
+<td align="left">Earth and Human Activity</td>
+<td align="right">0.0024617</td>
+</tr>
+<tr class="odd">
+<td align="left">5-ess2</td>
+<td align="right">21</td>
+<td align="right">304.42857</td>
+<td align="left">Earth’s Systems</td>
+<td align="right">0.0023498</td>
+</tr>
+<tr class="even">
+<td align="left">hs-ess2</td>
+<td align="right">21</td>
+<td align="right">209.38095</td>
+<td align="left">Earth’s Systems</td>
+<td align="right">0.0023498</td>
+</tr>
+<tr class="odd">
+<td align="left">hs-ps3</td>
+<td align="right">21</td>
+<td align="right">355.47619</td>
+<td align="left">Energy</td>
+<td align="right">0.0023498</td>
+</tr>
+<tr class="even">
+<td align="left">ms-ess1</td>
+<td align="right">21</td>
+<td align="right">49.09524</td>
+<td align="left">Earth’s Place in the Universe</td>
+<td align="right">0.0023498</td>
+</tr>
+<tr class="odd">
+<td align="left">2-ps1</td>
+<td align="right">19</td>
+<td align="right">66.89474</td>
+<td align="left">Matter and Its Interactions</td>
+<td align="right">0.0021260</td>
+</tr>
+<tr class="even">
+<td align="left">hs-ls2</td>
+<td align="right">19</td>
+<td align="right">324.26316</td>
+<td align="left">Ecosystems:</td>
+<td align="right">0.0021260</td>
+</tr>
+<tr class="odd">
+<td align="left">hs-ls3</td>
+<td align="right">19</td>
+<td align="right">92.63158</td>
+<td align="left">Heredity: Inheritance and Variation of Traits</td>
+<td align="right">0.0021260</td>
+</tr>
+<tr class="even">
+<td align="left">2-ess2</td>
+<td align="right">18</td>
+<td align="right">88.33333</td>
+<td align="left">Earth’s Systems</td>
+<td align="right">0.0020141</td>
+</tr>
+<tr class="odd">
+<td align="left">5-ess3</td>
+<td align="right">18</td>
+<td align="right">140.77778</td>
+<td align="left">Earth and Human Activity</td>
+<td align="right">0.0020141</td>
+</tr>
+<tr class="even">
+<td align="left">hs-ps2</td>
+<td align="right">18</td>
+<td align="right">255.00000</td>
+<td align="left">Motion and Stability: Forces and Interactions</td>
+<td align="right">0.0020141</td>
+</tr>
+<tr class="odd">
+<td align="left">ms-ls4</td>
+<td align="right">18</td>
+<td align="right">47.61111</td>
+<td align="left">Biological Evolution: Unity and Diversity</td>
+<td align="right">0.0020141</td>
+</tr>
+<tr class="even">
+<td align="left">2-ls2</td>
+<td align="right">17</td>
+<td align="right">60.47059</td>
+<td align="left">Ecosystems: Interactions, Energy, and Dynamics</td>
+<td align="right">0.0019022</td>
+</tr>
+<tr class="odd">
+<td align="left">2-ls4</td>
+<td align="right">17</td>
+<td align="right">56.17647</td>
+<td align="left">Biological Evolution: Unity and Diversity</td>
+<td align="right">0.0019022</td>
+</tr>
+<tr class="even">
+<td align="left">3-ls1</td>
+<td align="right">17</td>
+<td align="right">89.47059</td>
+<td align="left">From molecules to Organisms: Structures and
+Processes</td>
+<td align="right">0.0019022</td>
+</tr>
+<tr class="odd">
+<td align="left">5-ls1</td>
+<td align="right">16</td>
+<td align="right">177.56250</td>
+<td align="left">From Molecules to Organisms: Structures and
+Processes</td>
+<td align="right">0.0017903</td>
+</tr>
+<tr class="even">
+<td align="left">k-ess2</td>
+<td align="right">16</td>
+<td align="right">70.31250</td>
+<td align="left">Earth’s Systems</td>
+<td align="right">0.0017903</td>
+</tr>
+<tr class="odd">
+<td align="left">hs-ess3</td>
+<td align="right">15</td>
+<td align="right">74.86667</td>
+<td align="left">Earth and Human Activity</td>
+<td align="right">0.0016784</td>
+</tr>
+<tr class="even">
+<td align="left">hs-ps4</td>
+<td align="right">15</td>
+<td align="right">230.06667</td>
+<td align="left">Waves and their Applications in Technologies for
+Information Transfer</td>
+<td align="right">0.0016784</td>
+</tr>
+<tr class="odd">
+<td align="left">k-ls1</td>
+<td align="right">15</td>
+<td align="right">40.33333</td>
+<td align="left">From Molecules to Organisms: Structures and
+Processes</td>
+<td align="right">0.0016784</td>
+</tr>
+<tr class="even">
+<td align="left">3-ls2</td>
+<td align="right">14</td>
+<td align="right">98.00000</td>
+<td align="left">Ecosystems: Interactions, Energy, and Dynamics</td>
+<td align="right">0.0015665</td>
+</tr>
+<tr class="odd">
+<td align="left">3-ps2</td>
+<td align="right">14</td>
+<td align="right">87.00000</td>
+<td align="left">Motion and Stability: Forces and Interactions</td>
+<td align="right">0.0015665</td>
+</tr>
+<tr class="even">
+<td align="left">5-ess1</td>
+<td align="right">13</td>
+<td align="right">28.84615</td>
+<td align="left">Earth’s Place in the Universe</td>
+<td align="right">0.0014546</td>
+</tr>
+<tr class="odd">
+<td align="left">k-ps3</td>
+<td align="right">13</td>
+<td align="right">47.76923</td>
+<td align="left">Energy</td>
+<td align="right">0.0014546</td>
+</tr>
+<tr class="even">
+<td align="left">5-ps3</td>
+<td align="right">12</td>
+<td align="right">216.50000</td>
+<td align="left">Energy</td>
+<td align="right">0.0013427</td>
+</tr>
+<tr class="odd">
+<td align="left">1-ess1</td>
+<td align="right">11</td>
+<td align="right">55.81818</td>
+<td align="left">Earth’s Place in the Universe</td>
+<td align="right">0.0012308</td>
+</tr>
+<tr class="even">
+<td align="left">3-ess2</td>
+<td align="right">11</td>
+<td align="right">59.81818</td>
+<td align="left">Earth’s Systems</td>
+<td align="right">0.0012308</td>
+</tr>
+<tr class="odd">
+<td align="left">4-ess2</td>
+<td align="right">11</td>
+<td align="right">54.18182</td>
+<td align="left">Earth’s Systems</td>
+<td align="right">0.0012308</td>
+</tr>
+<tr class="even">
+<td align="left">ms-ls3</td>
+<td align="right">11</td>
+<td align="right">66.00000</td>
+<td align="left">Heredity: Inheritance and Variation of Traits</td>
+<td align="right">0.0012308</td>
+</tr>
+<tr class="odd">
+<td align="left">ms-ps4</td>
+<td align="right">11</td>
+<td align="right">50.90909</td>
+<td align="left">Waves and their Applications in Technologies for
+Information Transfer</td>
+<td align="right">0.0012308</td>
+</tr>
+<tr class="even">
+<td align="left">1-ls3</td>
+<td align="right">10</td>
+<td align="right">64.40000</td>
+<td align="left">Heredity: Inheritance and Variation of Traits</td>
+<td align="right">0.0011189</td>
+</tr>
+<tr class="odd">
+<td align="left">4-ps4</td>
+<td align="right">10</td>
+<td align="right">42.90000</td>
+<td align="left">Waves and Their Applications in Technologies for
+Information Transfer</td>
+<td align="right">0.0011189</td>
+</tr>
+<tr class="even">
+<td align="left">hs-ess1</td>
+<td align="right">8</td>
+<td align="right">649.00000</td>
+<td align="left">Earth’s Place in the Universe</td>
+<td align="right">0.0008952</td>
+</tr>
+<tr class="odd">
+<td align="left">ms-ps2</td>
+<td align="right">8</td>
+<td align="right">47.25000</td>
+<td align="left">Motion and Stability: Forces and Interactions</td>
+<td align="right">0.0008952</td>
+</tr>
+<tr class="even">
+<td align="left">k-ps2</td>
+<td align="right">7</td>
+<td align="right">64.71429</td>
+<td align="left">Motion and Stability: Forces and Interactions</td>
+<td align="right">0.0007833</td>
+</tr>
+<tr class="odd">
+<td align="left">3-ess3</td>
+<td align="right">5</td>
+<td align="right">53.40000</td>
+<td align="left">Earth and Human Activity</td>
+<td align="right">0.0005595</td>
+</tr>
+<tr class="even">
+<td align="left">2-ess1</td>
+<td align="right">4</td>
+<td align="right">57.50000</td>
+<td align="left">Earth’s Place in the Universe</td>
+<td align="right">0.0004476</td>
+</tr>
+<tr class="odd">
+<td align="left">4-ess3</td>
+<td align="right">4</td>
+<td align="right">69.75000</td>
+<td align="left">Earth and Human Activity</td>
+<td align="right">0.0004476</td>
+</tr>
+<tr class="even">
+<td align="left">4-ess1</td>
+<td align="right">3</td>
+<td align="right">21.00000</td>
+<td align="left">Earth’s Place in the Universe</td>
+<td align="right">0.0003357</td>
+</tr>
+<tr class="odd">
+<td align="left">5-ps2</td>
+<td align="right">3</td>
+<td align="right">36.66667</td>
+<td align="left">Motion and Stability: Forces and Interactions</td>
+<td align="right">0.0003357</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>t %&gt;% 
+  unnest(subject) %&gt;% 
+  filter(subject %in% c(&quot;Applied Science&quot;, &quot;Life Science&quot;, &quot;Physical Science&quot;)) %&gt;% 
+  unnest(standards) %&gt;% 
+  unnest(standards) %&gt;%
+  mutate(standards = tolower(standards)) %&gt;% 
+  filter(str_detect(standards, &quot;ngss&quot;)) %&gt;% 
+  nrow()</code></pre>
+<pre><code>## [1] 1294</code></pre>
+<pre class="r"><code>2</code></pre>
+<pre><code>## [1] 2</code></pre>
 </div>
 
 

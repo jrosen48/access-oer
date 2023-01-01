@@ -3,6 +3,29 @@ library(rvest)
 
 l <- list.files("html", full.names = TRUE)
 
+read_materials <- function(x) {
+  h <- read_lines(x)
+  print(x)
+  the_materials <- str_detect(h, "Material Type") %>% which()
+  h[the_materials+3] 
+}
+
+revised_materials <- l %>% 
+  map(read_materials)
+
+revised_materials <- revised_materials %>% 
+  str_trim() %>% 
+  str_sub(start = 39, end = -8)
+
+revised_materials <- revised_materials %>% 
+  str_remove_all("</span><span class=\"tx\">, ")
+
+x <- read_rds("final-oer-commons-data.rds")
+
+x$material_type <- revised_materials
+
+write_rds(x, "final-oer-commons-data.rds")
+
 # titles <- l %>% 
 #   map(access_title)
 # 
